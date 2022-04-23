@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>게시판 - 목록</title>
+  <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
+</head>
+<body>
+<header th:insert="common/header.html"></header>        <!-- header부분 header.html에 있는 디자인 출력 -->
+<div class="container">
+  <div class="row wider justify-content-end">
+    <a th:href="@{/post}" th:value="글쓰기"><button style="background-color:darkseagreen; color:black"><img src="img/pencil.png" width="30" height="30">글쓰기</button></a>
+  </div><br>
+  <table class="table">                           <!-- 데이터 출력을 테이블 형식으로 출력 -->
+    <thead class="thead-light">
+    <tr class="text-center">
+      <th scope="col">순서</th>                    <!-- scope="col"을 통해 테이블 제목을 구분해줌 -->
+      <th scope="col">제목</th>                 <!-- scope="col"을 통해 4개의 항목을 지정해 주면 밑에 코드에서 -->
+      <th scope="col">작성자</th>               <!-- 첫 시작점만 잡아주고 값 4개를 입력해주면 차례대로 col항목으로 들어감 -->
+      <th scope="col">작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" th:each="post : ${postList}">     <!-- th = thymleaf(타임리프) 동적으로 렌더링 해줌 -->
+                                                              <!-- th:each => 반복문 처리 -->
+      <th scope="row">
+        <span>
+          <script>
+            var count = 1;
+            document.write(count);
+            count += 1;
+          </script>
+        </span>
+      </th>
+      <td>
+        <a th:href="@{'/post/' + ${post.id}}">        <!-- 기본키 값인 id를 통해 데이터를 불러옴 -->
+          <span th:text="${post.title}"></span>
+        </a>
+      </td>
+      <td>
+        <span th:text="${post.author}"></span>
+      </td>
+      <td>
+        <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
