@@ -14,6 +14,7 @@
         }
         else if(check == false){
             alert("삭제가 취소되었습니다.");
+
         }
     }
 </script>
@@ -37,7 +38,7 @@
         <div class="col-auto">
             <form id="delete-from" th:action="@{'/post/' + ${post.id}}" method="post">
                 <input type="hidden" name="_method" value="delete"/>
-                <button id="delete-btn" type="submit" class="btn btn-danger" onclick="con();">삭제</button>
+                <button id="delete-btn" type="submit" class="btn btn-danger" onclick="con()">삭제</button>
             </form>
         </div>
     </div>

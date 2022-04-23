@@ -16,7 +16,7 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @GetMapping("/board")
+    @GetMapping("/board")                   // html을 화면에 뿌릴때 많이 사용
     public String list(Model model) {
         List<BoardDto> boardDtoList = boardService.getBoardList();
         model.addAttribute("postList", boardDtoList);
@@ -25,10 +25,10 @@ public class BoardController {
 
     @GetMapping("/post")
     public String post() {
-        return "board/post.html";
+        return "board/post2.html";
     }
 
-    @PostMapping("/post")
+    @PostMapping("/post")                   // 전송한 데이터를 insert 한 경우 많이 사용
     public String write(BoardDto boardDto) {
         boardService.savePost(boardDto);
         return "redirect:/board";
@@ -48,13 +48,13 @@ public class BoardController {
         return "board/edit.html";
     }
 
-    @PutMapping("/post/edit/{id}")
+    @PutMapping("/post/edit/{id}")                          // 페이지 수정을 위한 매핑(데이터 전체 수정)
     public String update(BoardDto boardDto) {
         boardService.savePost(boardDto);
         return "redirect:/board";
     }
 
-    @DeleteMapping("/post/{id}")
+    @DeleteMapping("/post/{id}")                        // 데이터 삭제를 위한 매핑
     public String delete(@PathVariable("id") Long id) {
         boardService.deletePost(id);
         return "redirect:/board";
